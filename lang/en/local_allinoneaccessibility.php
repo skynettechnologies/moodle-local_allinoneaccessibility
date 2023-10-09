@@ -26,7 +26,7 @@ $string['allinoneaccessibilitydesc'] = 'All In One Accessibility';
 $string['allinoneaccessibility:allow'] = 'Allow all for user roles';
 
 
-$string['aioa-licensekey'] = 'License Key';
+$string['aioa-licensekey'] = 'License key required for full version';
 $string['aioa-licensekeydesc'] = 'Please <a href="https://www.skynettechnologies.com/add-ons/cart/?add-to-cart=116&variation_id=117&quantity=1&utm_source='.$current_domain.'&utm_medium=moodle-module&&utm_campaign=purchase-plan">Upgrade</a> to full version of All in One Accessibility Pro.';
 $string['aioa-is_enabled'] = 'Enable';
 $string['aioa-yes'] = 'Yes';
