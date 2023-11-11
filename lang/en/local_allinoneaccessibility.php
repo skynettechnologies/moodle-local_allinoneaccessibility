@@ -70,7 +70,33 @@ $string['aioa-icontypedesc'] = '<div class="row">
     window.addEventListener("load", function() {
         aiwidgetapikeychange();
     });
-</script>';
+    console.log("Log Callss");
+     if (toggleControls1.value=="") {
+        var request = new XMLHttpRequest();
+        var url =  \'https://www.skynettechnologies.com/add-ons/discount_offer.php?platform=octoberCMS?\';
+        request.open(\'POST\', url, true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+        request.onreadystatechange = function() {
+            //$(\'.loading\').hide();
+            if (request.readyState === XMLHttpRequest.DONE) {
+                if (request.status === 200 && request.response!="") {
+                    //console.log(request.response);
+                     const form_tag = document.getElementById("adminsettings");
+                     const form_tag_parentElement = form_tag.querySelector("fieldset");
+                     console.log(form_tag_parentElement);
+                     
+                    theKid = document.createElement("div");
+                    theKid.innerHTML = request.response;
+                    form_tag_parentElement.appendChild(theKid);
+                    form_tag_parentElement.insertBefore(theKid, form_tag_parentElement.firstChild);
+                }
+            }
+        };
+        //$(\'.loading\').show();
+        request.send();
+    }
+</script><style>.ada-banner-section{padding-left: inherit;}</style>';
 
 $string['aioa-top_left'] = 'Top Left';
 $string['aioa-top_center'] = 'Top Center';
