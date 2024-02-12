@@ -47,4 +47,4 @@ Go the plugin settings and configure All in One Accessibility the way you like.Y
 
 ### License
 
-All in One Accessibility is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+All in One Accessibility is licensed under the GNU General Public License - see the [LICENSE](LICENSE) file for details
