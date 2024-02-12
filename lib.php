@@ -16,10 +16,9 @@
 
 
 /**
- * Local Redirect
+ * Local All In One Accessibility
  *
- * This local plugin that adds a 'friendly url' version of Google analytics
- * to Moodle
+ * Quick Web Accessibility Implementation with All In One Accessibility!
  *
  * @package    local
  * @subpackage local_allinoneaccessibility
@@ -41,6 +40,7 @@ function local_allinoneaccessibility_before_footer()
     $iconsize = isset($widget_setting_ada->iconsize)?$widget_setting_ada->iconsize:'aioa-default-icon';
     $icontype = isset($widget_setting_ada->icontype)?$widget_setting_ada->icontype:'aioa-icon-type-1';
     $time=rand(0,10);
+    $current_domain=isset($_SERVER['HTTP_HOST'])?$_SERVER['HTTP_HOST']:'-';
     
     /*$settings = Array('colorcode', 'iconposition');
     $show = false;
@@ -54,5 +54,56 @@ function local_allinoneaccessibility_before_footer()
     if($isenabled=='yes' && !in_array($PAGE->pagelayout, $excludepages)) {
         $request_param='colorcode=#'.$color.'&token='.$token.'&t='.$time.'&position='.$iconposition.'.'.$icontype.'.'.$iconsize;
         echo "<script id='aioa-adawidget' src='https://www.skynettechnologies.com/accessibility/js/all-in-one-accessibility-js-widget-minify.js?$request_param'></script>";
+    }    else if($PAGE->pagelayout=='admin') {
+        echo '<script>
+        function aiwidgetapikeychange(){
+            var toggleControls = document.getElementById("id_s_local_allinoneaccessibility_licensekey");
+            var selector_value = toggleControls.value;
+            var adminiconsize = document.getElementById(\'admin-iconsize\');
+            var adminicontype = document.getElementById(\'admin-icontype\');
+            adminiconsize.style.display = "none";
+            adminicontype.style.display = "none";
+            var keypurchase_msg="<p>Please <a href=\'https://www.skynettechnologies.com/add-ons/cart/?add-to-cart=116&variation_id=117&quantity=1&utm_source='.$current_domain.'&utm_medium=moodle-module&&utm_campaign=purchase-plan\'>Upgrade</a> to full version of All in One Accessibility Pro.</p>";
+            document.querySelector("#admin-licensekey > .form-setting > .form-description").innerHTML=keypurchase_msg;
+            if(selector_value!="") {
+                adminiconsize.style.display = "";
+                adminicontype.style.display = "";
+               //document.querySelector("#admin-licensekey > .form-setting > .form-description").innerHTML="";
+            }
+        }
+        var toggleControls1 = document.getElementById("id_s_local_allinoneaccessibility_licensekey");
+        toggleControls1.addEventListener("change", function(event) {
+            aiwidgetapikeychange();
+        });
+        window.addEventListener("load", function() {
+            aiwidgetapikeychange();
+        });
+        console.log("Log Callss");
+         if (toggleControls1.value=="") {
+            var request = new XMLHttpRequest();
+            var url =  \'https://www.skynettechnologies.com/add-ons/discount_offer.php?platform=moodle?\';
+            request.open(\'POST\', url, true);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    
+            request.onreadystatechange = function() {
+                //$(\'.loading\').hide();
+                if (request.readyState === XMLHttpRequest.DONE) {
+                    if (request.status === 200 && request.response!="") {
+                        //console.log(request.response);
+                         const form_tag = document.getElementById("adminsettings");
+                         const form_tag_parentElement = form_tag.querySelector("fieldset");
+                         console.log(form_tag_parentElement);
+                         
+                        theKid = document.createElement("div");
+                        theKid.innerHTML = request.response;
+                        form_tag_parentElement.appendChild(theKid);
+                        form_tag_parentElement.insertBefore(theKid, form_tag_parentElement.firstChild);
+                    }
+                }
+            };
+            //$(\'.loading\').show();
+            request.send();
+        }
+        </script><style>.ada-banner-section{padding-left: inherit;}</style>';
     }
 }

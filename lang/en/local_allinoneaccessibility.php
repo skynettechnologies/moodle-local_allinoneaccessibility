@@ -20,14 +20,11 @@
  * @package     local_allinoneaccessibility
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-$current_domain=isset($_SERVER['HTTP_HOST'])?$_SERVER['HTTP_HOST']:'-';
 $string['pluginname'] = 'All In One Accessibility';
 $string['allinoneaccessibilitydesc'] = 'All In One Accessibility';
 $string['allinoneaccessibility:allow'] = 'Allow all for user roles';
-
-
 $string['aioa-licensekey'] = 'License key required for full version';
-$string['aioa-licensekeydesc'] = 'Please <a href="https://www.skynettechnologies.com/add-ons/cart/?add-to-cart=116&variation_id=117&quantity=1&utm_source='.$current_domain.'&utm_medium=moodle-module&&utm_campaign=purchase-plan">Upgrade</a> to full version of All in One Accessibility Pro.';
+$string['aioa-licensekeydesc'] = 'Please Upgrade to full version of All in One Accessibility Pro.';
 $string['aioa-is_enabled'] = 'Enable';
 $string['aioa-yes'] = 'Yes';
 $string['aioa-no'] = 'No';
@@ -35,69 +32,11 @@ $string['aioa-colorcode'] = 'Hex color code:';
 $string['aioa-colorcodedesc'] = 'You can customize the ADA Widget color. For example: FF5733';
 $string['aioa-iconposition'] = 'Icon Position:';
 $string['aioa-iconpositiondesc'] = 'Where would you like to place the accessibility icon on your site?';
-
-
 $string['aioa-icontype'] = 'Select icon type:';
 $string['aioa-icon-type-1'] = 'Accessibility';
 $string['aioa-icon-type-2'] = 'Wheelchair';
 $string['aioa-icon-type-3'] = 'Low Vision';
-
-$string['aioa-icontypedesc'] = '<div class="row">
-<div class="col-md-1">'.$string['aioa-icon-type-1'].'</div>
-<div class="col-md-1">'.$string['aioa-icon-type-2'].'</div>
-<div class="col-md-2">'.$string['aioa-icon-type-3'].'</div>
-</div><div class="row mb-3">
-<div class="col-md-1"><img src="https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-1.svg" width="55" height="55" style="background-color:#6f42c1;border-radius:100%"></div>
-<div class="col-md-1"><img src="https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-2.svg" width="55" height="55" style="background-color:#6f42c1;border-radius:100%"></div>
-<div class="col-md-2"><img src="https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-3.svg" width="55" height="55" style="background-color:#6f42c1;border-radius:100%"></div>
-</div><script>
-    function aiwidgetapikeychange(){
-        var toggleControls = document.getElementById("id_s_local_allinoneaccessibility_licensekey");
-        var selector_value = toggleControls.value;
-        var adminiconsize = document.getElementById(\'admin-iconsize\');
-        var adminicontype = document.getElementById(\'admin-icontype\');
-        adminiconsize.style.display = "none";
-        adminicontype.style.display = "none";
-        if(selector_value!="") {
-            adminiconsize.style.display = "";
-            adminicontype.style.display = "";
-        }
-    }
-    var toggleControls1 = document.getElementById("id_s_local_allinoneaccessibility_licensekey");
-    toggleControls1.addEventListener("change", function(event) {
-        aiwidgetapikeychange();
-    });
-    window.addEventListener("load", function() {
-        aiwidgetapikeychange();
-    });
-    console.log("Log Callss");
-     if (toggleControls1.value=="") {
-        var request = new XMLHttpRequest();
-        var url =  \'https://www.skynettechnologies.com/add-ons/discount_offer.php?platform=octoberCMS?\';
-        request.open(\'POST\', url, true);
-        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-        request.onreadystatechange = function() {
-            //$(\'.loading\').hide();
-            if (request.readyState === XMLHttpRequest.DONE) {
-                if (request.status === 200 && request.response!="") {
-                    //console.log(request.response);
-                     const form_tag = document.getElementById("adminsettings");
-                     const form_tag_parentElement = form_tag.querySelector("fieldset");
-                     console.log(form_tag_parentElement);
-                     
-                    theKid = document.createElement("div");
-                    theKid.innerHTML = request.response;
-                    form_tag_parentElement.appendChild(theKid);
-                    form_tag_parentElement.insertBefore(theKid, form_tag_parentElement.firstChild);
-                }
-            }
-        };
-        //$(\'.loading\').show();
-        request.send();
-    }
-</script><style>.ada-banner-section{padding-left: inherit;}</style>';
-
+$string['aioa-icontypedesc'] = '';
 $string['aioa-top_left'] = 'Top Left';
 $string['aioa-top_center'] = 'Top Center';
 $string['aioa-top_right'] = 'Top Right';
@@ -106,10 +45,8 @@ $string['aioa-middel_right'] = 'Middle Right';
 $string['aioa-bottom_left'] = 'Bottom Left';
 $string['aioa-bottom_center'] = 'Bottom Center';
 $string['aioa-bottom_right'] = 'Bottom Right';
-
 $string['aioa-iconsize'] = 'Select icon size:';
 $string['aioa-iconsizedesc'] = '';
-
 $string['aioa-big-icon'] = 'Big';
 $string['aioa-medium-icon'] = 'Medium';
 $string['aioa-default-icon'] = 'Default';
