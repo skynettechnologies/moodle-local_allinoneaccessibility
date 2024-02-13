@@ -34,7 +34,7 @@ function local_allinoneaccessibility_before_footer() {
     $widgetsettingada = get_config('local_allinoneaccessibility');
     $isenabled = isset($widgetsettingada->isenabled) ? $widgetsettingada->isenabled : 'no';
     $color = isset($widgetsettingada->colorcode) ? $widgetsettingada->colorcode : '0678be';
-    $color = trim(str_replace('#','', $color));
+    $color = trim(str_replace('#', '', $color));
     $token = isset($widgetsettingada->licensekey) ? $widgetsettingada->licensekey : '';
     $iconposition = isset($widgetsettingada->iconposition) ? $widgetsettingada->iconposition : '';
     $iconsize = isset($widgetsettingada->iconsize) ? $widgetsettingada->iconsize : 'aioa-default-icon';
@@ -44,7 +44,9 @@ function local_allinoneaccessibility_before_footer() {
     $excludepages = Array('admin', 'embedded', 'frametop', 'maintenance', 'popup', 'print', 'redirect', 'report');
     if ($isenabled == 'yes' && !in_array($PAGE->pagelayout, $excludepages)) {
         $requestparam = 'colorcode=#'.$color.'&token='.$token.'&t='.$time.'&position='.$iconposition.'.'.$icontype.'.'.$iconsize;
-        echo "<script id='aioa-adawidget' src='https://www.skynettechnologies.com/accessibility/js/all-in-one-accessibility-js-widget-minify.js?$requestparam'></script>";
+        $script = "<script id='aioa-adawidget' src='https://www.skynettechnologies.com/accessibility/js/all-in-one-accessibility";
+        $script .= "-js-widget-minify.js?$requestparam'></script>";
+        echo $script;
     } else if ($PAGE->pagelayout == 'admin') {
         echo '<script>
         function aiwidgetapikeychange(){
@@ -54,8 +56,10 @@ function local_allinoneaccessibility_before_footer() {
             var adminicontype = document.getElementById(\'admin-icontype\');
             adminiconsize.style.display = "none";
             adminicontype.style.display = "none";
-            var keypurchase_msg = "<p>Please <a href=\'https://www.skynettechnologies.com/add-ons/cart/?add-to-cart=116&variation_id=117&quantity=1&utm_source='.$currentdomain.'";
-            keypurchase_msg += "&utm_medium=moodle-module&&utm_campaign=purchase-plan\'>Upgrade</a> to full version of All in One Accessibility Pro.</p>";
+            var keypurchase_msg = "<p>Please <a href=\'https://www.skynettechnologies.com/add-ons/cart/?add-to-cart=116&variation_id=117";
+            keypurchase_msg += "&quantity=1&utm_source='.$currentdomain.'";
+            keypurchase_msg += "&utm_medium=moodle-module&&utm_campaign=purchase-plan\'>Upgrade</a>"
+            keypurchase_msg += " to full version of All in One Accessibility Pro.</p>";
             document.querySelector("#admin-licensekey > .form-setting > .form-description").innerHTML=keypurchase_msg;
             if (selector_value!="") {
                 adminiconsize.style.display = "";
