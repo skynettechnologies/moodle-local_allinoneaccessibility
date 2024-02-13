@@ -2,6 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="81c8b6a8-748d-489b-94be-416c26731ae9" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/en/local_allinoneaccessibility.php" beforeDir="false" afterPath="$PROJECT_DIR$/lang/en/local_allinoneaccessibility.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/settings.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/version.php" beforeDir="false" afterPath="$PROJECT_DIR$/version.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -12,12 +18,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="local_allinoneaccessibility.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lang/en/local_allinoneaccessibility.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="48" column="34" selection-start-line="48" selection-start-column="34" selection-end-line="48" selection-end-column="34" />
+            <state relative-caret-position="643">
+              <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
             </state>
           </provider>
         </entry>
@@ -26,7 +32,7 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="378">
+              <first_editor relative-caret-position="540">
                 <caret line="30" column="31" lean-forward="true" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
               </first_editor>
               <second_editor />
@@ -37,39 +43,56 @@
       <file leaf-file-name="lib.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="71" column="13" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
+            <state relative-caret-position="599">
+              <caret line="95" lean-forward="true" selection-start-line="95" selection-end-line="95" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="version.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="version.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/version.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="27" column="31" lean-forward="true" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+            <state relative-caret-position="288">
+              <caret line="29" column="31" lean-forward="true" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="styles.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/styles.css">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file leaf-file-name="settings.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/settings.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-378" />
+            <state relative-caret-position="-197">
+              <caret line="37" column="22" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="22" />
+              <folding>
+                <element signature="e#6#57#0#PHP" expanded="true" />
+              </folding>
+            </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LICENSE" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LICENSE">
-          <provider selected="true" editor-type-id="text-editor" />
+      <file leaf-file-name="ci.yml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.github/workflows/ci.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="523">
+              <caret line="79" column="33" lean-forward="true" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>Moodle</find>
+      <find>Moodle Code Checker</find>
+      <find>_</find>
+      <find>=&gt;</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>$widgetsettingada</replace>
+      <replace>$currentdomain</replace>
+      <replace>$requestparam</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -78,10 +101,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/db/access.php" />
-        <option value="$PROJECT_DIR$/lang/en/local_allinoneaccessibility.php" />
-        <option value="$PROJECT_DIR$/lib.php" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/.github/workflows/ci.yml" />
+        <option value="$PROJECT_DIR$/lib.php" />
         <option value="$PROJECT_DIR$/version.php" />
+        <option value="$PROJECT_DIR$/settings.php" />
+        <option value="$PROJECT_DIR$/lang/en/local_allinoneaccessibility.php" />
       </list>
     </option>
   </component>
@@ -95,8 +120,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="260" />
-    <option name="y" value="20" />
+    <option name="x" value="308" />
+    <option name="y" value="252" />
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
@@ -112,6 +137,17 @@
             <path>
               <item name="moodle-allinoneaccessibility" type="b2602c69:ProjectViewProjectNode" />
               <item name="moodle-allinoneaccessibility" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moodle-allinoneaccessibility" type="b2602c69:ProjectViewProjectNode" />
+              <item name="moodle-allinoneaccessibility" type="462c0819:PsiDirectoryNode" />
+              <item name=".github" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moodle-allinoneaccessibility" type="b2602c69:ProjectViewProjectNode" />
+              <item name="moodle-allinoneaccessibility" type="462c0819:PsiDirectoryNode" />
+              <item name=".github" type="462c0819:PsiDirectoryNode" />
+              <item name="workflows" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="moodle-allinoneaccessibility" type="b2602c69:ProjectViewProjectNode" />
@@ -158,37 +194,38 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707713766587</updated>
-      <workItem from="1707713768678" duration="17068000" />
+      <workItem from="1707713768678" duration="18353000" />
+      <workItem from="1707798048720" duration="5294000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17068000" />
+    <option name="totallyTimeSpent" value="23647000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4988864" visible="true" weight="0.20415778" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4988864" visible="true" weight="0.20628998" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.39718616" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.15151516" />
       <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info id="npm" order="2" sideWeight="0.5011136" side_tool="true" weight="0.20202559" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32897604" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32897604" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -198,45 +235,27 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/db/access.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="28" column="34" lean-forward="true" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/styles.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/settings.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-378" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LICENSE">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/lang/en/local_allinoneaccessibility.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
+        <state relative-caret-position="630">
           <caret line="48" column="34" selection-start-line="48" selection-start-column="34" selection-end-line="48" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="71" column="13" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="378">
+          <first_editor relative-caret-position="540">
             <caret line="30" column="31" lean-forward="true" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1044">
+          <caret line="71" column="13" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -244,6 +263,68 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="27" column="31" lean-forward="true" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1188">
+          <caret line="79" column="1" lean-forward="true" selection-start-line="79" selection-start-column="1" selection-end-line="79" selection-end-column="1" />
+          <folding>
+            <element signature="e#6#57#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/access.php" />
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="540">
+            <caret line="30" column="31" lean-forward="true" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="599">
+          <caret line="95" lean-forward="true" selection-start-line="95" selection-end-line="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/version.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="29" column="31" lean-forward="true" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lang/en/local_allinoneaccessibility.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="643">
+          <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-197">
+          <caret line="37" column="22" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="22" />
+          <folding>
+            <element signature="e#6#57#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.github/workflows/ci.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="523">
+          <caret line="79" column="33" lean-forward="true" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
         </state>
       </provider>
     </entry>

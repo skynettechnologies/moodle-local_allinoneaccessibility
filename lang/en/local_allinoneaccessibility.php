@@ -16,8 +16,9 @@
 
 /**
  * Language strings definition
- *
- * @package     local_allinoneaccessibility
+ * @package    local
+ * @subpackage local_allinoneaccessibility
+ * @copyright  2024
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['pluginname'] = 'All In One Accessibility';

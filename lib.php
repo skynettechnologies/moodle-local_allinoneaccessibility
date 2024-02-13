@@ -22,39 +22,28 @@
  *
  * @package    local
  * @subpackage local_allinoneaccessibility
- * @copyright  2023
+ * @copyright  2024
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-function local_allinoneaccessibility_before_footer()
-{
+function local_allinoneaccessibility_before_footer() {
     global $PAGE;
-    $widget_setting_ada=get_config('local_allinoneaccessibility');
-    
-    /*$widget_setting_ada = ga_widget_settings();*/
-    $isenabled = isset($widget_setting_ada->isenabled)?$widget_setting_ada->isenabled:'no';
-    $color = isset($widget_setting_ada->colorcode)?$widget_setting_ada->colorcode:'0678be';
+    $widgetsettingada = get_config('local_allinoneaccessibility');
+    $isenabled = isset($widgetsettingada->isenabled) ? $widgetsettingada->isenabled : 'no';
+    $color = isset($widgetsettingada->colorcode) ? $widgetsettingada->colorcode : '0678be';
     $color = trim(str_replace('#','',$color));
-    $token = isset($widget_setting_ada->licensekey)?$widget_setting_ada->licensekey:'';
-    $iconposition = isset($widget_setting_ada->iconposition)?$widget_setting_ada->iconposition:'';
-    $iconsize = isset($widget_setting_ada->iconsize)?$widget_setting_ada->iconsize:'aioa-default-icon';
-    $icontype = isset($widget_setting_ada->icontype)?$widget_setting_ada->icontype:'aioa-icon-type-1';
-    $time=rand(0,10);
-    $current_domain=isset($_SERVER['HTTP_HOST'])?$_SERVER['HTTP_HOST']:'-';
+    $token = isset($widgetsettingada->licensekey) ? $widgetsettingada->licensekey : '';
+    $iconposition = isset($widgetsettingada->iconposition) ? $widgetsettingada->iconposition : '';
+    $iconsize = isset($widgetsettingada->iconsize)? $widgetsettingada->iconsize : 'aioa-default-icon';
+    $icontype = isset($widgetsettingada->icontype)? $widgetsettingada->icontype : 'aioa-icon-type-1';
+    $time = rand(0, 10);
+    $currentdomain = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '-';
     
-    /*$settings = Array('colorcode', 'iconposition');
-    $show = false;
-    foreach ($settings as $setting) {
-        if (trim(get_config('local_allinoneaccessibility', $setting)) != '') {
-            $show = true;
-            break;
-        }
-    }*/
-    $excludepages = Array('admin', 'embedded', 'frametop', 'maintenance', 'popup','print', 'redirect', 'report');
-    if($isenabled=='yes' && !in_array($PAGE->pagelayout, $excludepages)) {
-        $request_param='colorcode=#'.$color.'&token='.$token.'&t='.$time.'&position='.$iconposition.'.'.$icontype.'.'.$iconsize;
-        echo "<script id='aioa-adawidget' src='https://www.skynettechnologies.com/accessibility/js/all-in-one-accessibility-js-widget-minify.js?$request_param'></script>";
-    }    else if($PAGE->pagelayout=='admin') {
+    $excludepages = Array('admin', 'embedded', 'frametop', 'maintenance', 'popup', 'print', 'redirect', 'report');
+    if ($isenabled == 'yes' && !in_array($PAGE->pagelayout, $excludepages)) {
+        $requestparam = 'colorcode=#'.$color.'&token='.$token.'&t='.$time.'&position='.$iconposition.'.'.$icontype.'.'.$iconsize;
+        echo "<script id='aioa-adawidget' src='https://www.skynettechnologies.com/accessibility/js/all-in-one-accessibility-js-widget-minify.js?$requestparam'></script>";
+    } else if($PAGE->pagelayout == 'admin') {
         echo '<script>
         function aiwidgetapikeychange(){
             var toggleControls = document.getElementById("id_s_local_allinoneaccessibility_licensekey");
@@ -63,12 +52,12 @@ function local_allinoneaccessibility_before_footer()
             var adminicontype = document.getElementById(\'admin-icontype\');
             adminiconsize.style.display = "none";
             adminicontype.style.display = "none";
-            var keypurchase_msg="<p>Please <a href=\'https://www.skynettechnologies.com/add-ons/cart/?add-to-cart=116&variation_id=117&quantity=1&utm_source='.$current_domain.'&utm_medium=moodle-module&&utm_campaign=purchase-plan\'>Upgrade</a> to full version of All in One Accessibility Pro.</p>";
+            var keypurchase_msg = "<p>Please <a href=\'https://www.skynettechnologies.com/add-ons/cart/?add-to-cart=116&variation_id=117&quantity=1&utm_source='.$currentdomain.'";
+            keypurchase_msg += "&utm_medium=moodle-module&&utm_campaign=purchase-plan\'>Upgrade</a> to full version of All in One Accessibility Pro.</p>";
             document.querySelector("#admin-licensekey > .form-setting > .form-description").innerHTML=keypurchase_msg;
-            if(selector_value!="") {
+            if (selector_value!="") {
                 adminiconsize.style.display = "";
                 adminicontype.style.display = "";
-               //document.querySelector("#admin-licensekey > .form-setting > .form-description").innerHTML="";
             }
         }
         var toggleControls1 = document.getElementById("id_s_local_allinoneaccessibility_licensekey");
@@ -86,14 +75,12 @@ function local_allinoneaccessibility_before_footer()
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     
             request.onreadystatechange = function() {
-                //$(\'.loading\').hide();
                 if (request.readyState === XMLHttpRequest.DONE) {
                     if (request.status === 200 && request.response!="") {
                         //console.log(request.response);
-                         const form_tag = document.getElementById("adminsettings");
-                         const form_tag_parentElement = form_tag.querySelector("fieldset");
-                         console.log(form_tag_parentElement);
-                         
+                        const form_tag = document.getElementById("adminsettings");
+                        const form_tag_parentElement = form_tag.querySelector("fieldset");
+                        console.log(form_tag_parentElement);
                         theKid = document.createElement("div");
                         theKid.innerHTML = request.response;
                         form_tag_parentElement.appendChild(theKid);
@@ -101,7 +88,6 @@ function local_allinoneaccessibility_before_footer()
                     }
                 }
             };
-            //$(\'.loading\').show();
             request.send();
         }
         </script><style>.ada-banner-section{padding-left: inherit;}</style>';
