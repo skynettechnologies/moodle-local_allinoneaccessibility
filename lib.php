@@ -20,30 +20,32 @@
  *
  * Quick Web Accessibility Implementation with All In One Accessibility!
  *
- * @package    local
- * @subpackage local_allinoneaccessibility
+ * @package local_allinoneaccessibility
  * @copyright  2024
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
+/**
+ * Render the setting for widget.
+ *
+ * @return void
+ */
 function local_allinoneaccessibility_before_footer() {
     global $PAGE;
     $widgetsettingada = get_config('local_allinoneaccessibility');
     $isenabled = isset($widgetsettingada->isenabled) ? $widgetsettingada->isenabled : 'no';
     $color = isset($widgetsettingada->colorcode) ? $widgetsettingada->colorcode : '0678be';
-    $color = trim(str_replace('#','',$color));
+    $color = trim(str_replace('#','', $color));
     $token = isset($widgetsettingada->licensekey) ? $widgetsettingada->licensekey : '';
     $iconposition = isset($widgetsettingada->iconposition) ? $widgetsettingada->iconposition : '';
-    $iconsize = isset($widgetsettingada->iconsize)? $widgetsettingada->iconsize : 'aioa-default-icon';
-    $icontype = isset($widgetsettingada->icontype)? $widgetsettingada->icontype : 'aioa-icon-type-1';
+    $iconsize = isset($widgetsettingada->iconsize) ? $widgetsettingada->iconsize : 'aioa-default-icon';
+    $icontype = isset($widgetsettingada->icontype) ? $widgetsettingada->icontype : 'aioa-icon-type-1';
     $time = rand(0, 10);
     $currentdomain = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '-';
-    
     $excludepages = Array('admin', 'embedded', 'frametop', 'maintenance', 'popup', 'print', 'redirect', 'report');
     if ($isenabled == 'yes' && !in_array($PAGE->pagelayout, $excludepages)) {
         $requestparam = 'colorcode=#'.$color.'&token='.$token.'&t='.$time.'&position='.$iconposition.'.'.$icontype.'.'.$iconsize;
         echo "<script id='aioa-adawidget' src='https://www.skynettechnologies.com/accessibility/js/all-in-one-accessibility-js-widget-minify.js?$requestparam'></script>";
-    } else if($PAGE->pagelayout == 'admin') {
+    } else if ($PAGE->pagelayout == 'admin') {
         echo '<script>
         function aiwidgetapikeychange(){
             var toggleControls = document.getElementById("id_s_local_allinoneaccessibility_licensekey");
@@ -73,7 +75,6 @@ function local_allinoneaccessibility_before_footer() {
             var url =  \'https://www.skynettechnologies.com/add-ons/discount_offer.php?platform=moodle?\';
             request.open(\'POST\', url, true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    
             request.onreadystatechange = function() {
                 if (request.readyState === XMLHttpRequest.DONE) {
                     if (request.status === 200 && request.response!="") {

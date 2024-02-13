@@ -16,8 +16,7 @@
 
 /**
  * Settings definition
- * @package    local
- * @subpackage local_allinoneaccessibility
+ * @package local_allinoneaccessibility
  * @copyright  2024
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,9 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 if ($hassiteconfig) {
     // Settings will be NULL.
     $settings = new admin_settingpage('local_allinoneaccessibility', get_string('pluginname', 'local_allinoneaccessibility'));
-    
     $ADMIN->add('localplugins', $settings);
-    
     $settings->add(new admin_setting_configselect(
             'local_allinoneaccessibility/isenabled',
             get_string('aioa-is_enabled', 'local_allinoneaccessibility'),
@@ -37,17 +34,14 @@ if ($hassiteconfig) {
             'yes',
             ['yes' => get_string('aioa-yes', 'local_allinoneaccessibility'),
                 'no' => get_string('aioa-no', 'local_allinoneaccessibility')]));
-    
     $settings->add(new admin_setting_configtext('local_allinoneaccessibility/licensekey',
             get_string('aioa-licensekey', 'local_allinoneaccessibility'),
             get_string('aioa-licensekeydesc', 'local_allinoneaccessibility'),
             ''));
-    
     $settings->add(new admin_setting_configtext('local_allinoneaccessibility/colorcode',
             get_string('aioa-colorcode', 'local_allinoneaccessibility'),
             get_string('aioa-colorcodedesc', 'local_allinoneaccessibility'),
             '6F42C1'));
-    
     $settings->add(new admin_setting_configselect('local_allinoneaccessibility/iconposition',
             get_string('aioa-iconposition', 'local_allinoneaccessibility'),
             '',
@@ -60,7 +54,6 @@ if ($hassiteconfig) {
                 'bottom_left' => get_string('aioa-bottom_left', 'local_allinoneaccessibility'),
                 'bottom_center' => get_string('aioa-bottom_center', 'local_allinoneaccessibility'),
                 'bottom_right' => get_string('aioa-bottom_right', 'local_allinoneaccessibility')]));
-    
     $settings->add(new admin_setting_configselect('local_allinoneaccessibility/iconsize',
             get_string('aioa-iconsize', 'local_allinoneaccessibility'),
             '',
@@ -70,7 +63,6 @@ if ($hassiteconfig) {
                 'aioa-default-icon' => get_string('aioa-default-icon', 'local_allinoneaccessibility'),
                 'aioa-small-icon' => get_string('aioa-small-icon', 'local_allinoneaccessibility'),
                 'aioa-extra-small-icon' => get_string('aioa-extra-small-icon', 'local_allinoneaccessibility')]));
-    
     $settings->add(new admin_setting_configselect('local_allinoneaccessibility/icontype',
             get_string('aioa-icontype', 'local_allinoneaccessibility'),
             get_string('aioa-icontypedesc', 'local_allinoneaccessibility'),
