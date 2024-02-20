@@ -32,7 +32,6 @@
 function local_allinoneaccessibility_before_footer() {
     global $PAGE;
     $widgetsettingada = get_config('local_allinoneaccessibility');
-    
     $isenabled = isset($widgetsettingada->isenabled) ? $widgetsettingada->isenabled : 'no';
     $color = isset($widgetsettingada->colorcode) ? $widgetsettingada->colorcode : '0678be';
     $color = trim(str_replace('#', '', $color));
