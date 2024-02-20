@@ -73,7 +73,6 @@ function local_allinoneaccessibility_before_footer() {
         window.addEventListener("load", function() {
             aiwidgetapikeychange();
         });
-        console.log("Log Callss");
          if (toggleControls1.value=="") {
             var request = new XMLHttpRequest();
             var url =  \'https://www.skynettechnologies.com/add-ons/discount_offer.php?platform=moodle?\';
