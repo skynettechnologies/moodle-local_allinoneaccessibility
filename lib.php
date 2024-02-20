@@ -32,6 +32,7 @@
 function local_allinoneaccessibility_before_footer() {
     global $PAGE;
     $widgetsettingada = get_config('local_allinoneaccessibility');
+    $time = rand(0, 10);
     $isenabled = isset($widgetsettingada->isenabled) ? $widgetsettingada->isenabled : 'no';
     $color = isset($widgetsettingada->colorcode) ? $widgetsettingada->colorcode : '0678be';
     $color = trim(str_replace('#', '', $color));
@@ -39,7 +40,7 @@ function local_allinoneaccessibility_before_footer() {
     $iconposition = isset($widgetsettingada->iconposition) ? $widgetsettingada->iconposition : '';
     $iconsize = isset($widgetsettingada->iconsize) ? $widgetsettingada->iconsize : 'aioa-default-icon';
     $icontype = isset($widgetsettingada->icontype) ? $widgetsettingada->icontype : 'aioa-icon-type-1';
-    $time = rand(0, 10);
+    
     $currentdomain = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '-';
     $excludepages = Array('admin', 'embedded', 'frametop', 'maintenance', 'popup', 'print', 'redirect', 'report');
     if ($isenabled == 'yes' && !in_array($PAGE->pagelayout, $excludepages)) {
