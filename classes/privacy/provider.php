@@ -24,7 +24,6 @@
 
 namespace local_allinoneaccessibility\privacy;
 
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for local_allinoneaccessibility implementing null_provider.
