@@ -42,6 +42,9 @@ function local_allinoneaccessibility_before_footer() {
     $time = rand(0, 10);
     $currentdomain = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '-';
     $excludepages = Array('admin', 'embedded', 'frametop', 'maintenance', 'popup', 'print', 'redirect', 'report');
+    $licensekeymessage = get_string('aioa-licensekeydesc', 'local_allinoneaccessibility');
+    $upgrademessage = get_string('aioa-upgrade', 'local_allinoneaccessibility');
+    
     if ($isenabled == 'yes' && !in_array($PAGE->pagelayout, $excludepages)) {
         $requestparam = 'colorcode=#'.$color.'&token='.$token.'&t='.$time.'&position='.$iconposition.'.'.$icontype.'.'.$iconsize;
         $script = "<script id='aioa-adawidget' src='https://www.skynettechnologies.com/accessibility/js/all-in-one-accessibility";
@@ -56,10 +59,9 @@ function local_allinoneaccessibility_before_footer() {
             var adminicontype = document.getElementById(\'admin-icontype\');
             adminiconsize.style.display = "none";
             adminicontype.style.display = "none";
-            var keypurchase_msg = "<p>Please <a href=\'https://www.skynettechnologies.com/add-ons/cart/?add-to-cart=116&variation_id=117";
+            var keypurchase_msg = "<p>'.$licensekeymessage.'<br> <a href=\'https://www.skynettechnologies.com/add-ons/cart/?add-to-cart=116&variation_id=117";
             keypurchase_msg += "&quantity=1&utm_source='.$currentdomain.'";
-            keypurchase_msg += "&utm_medium=moodle-module&&utm_campaign=purchase-plan\'>Upgrade</a>"
-            keypurchase_msg += " to full version of All in One Accessibility Pro.</p>";
+            keypurchase_msg += "&utm_medium=moodle-module&&utm_campaign=purchase-plan\'>'.$upgrademessage.'</a>";
             document.querySelector("#admin-licensekey > .form-setting > .form-description").innerHTML=keypurchase_msg;
             if (selector_value!="") {
                 adminiconsize.style.display = "";
