@@ -44,7 +44,6 @@ function local_allinoneaccessibility_before_footer() {
     $excludepages = Array('admin', 'embedded', 'frametop', 'maintenance', 'popup', 'print', 'redirect', 'report');
     $licensekeymessage = get_string('aioa-licensekeydesc', 'local_allinoneaccessibility');
     $upgrademessage = get_string('aioa-upgrade', 'local_allinoneaccessibility');
-    
     if ($isenabled == 'yes' && !in_array($PAGE->pagelayout, $excludepages)) {
         $requestparam = 'colorcode=#'.$color.'&token='.$token.'&t='.$time.'&position='.$iconposition.'.'.$icontype.'.'.$iconsize;
         $script = "<script id='aioa-adawidget' src='https://www.skynettechnologies.com/accessibility/js/all-in-one-accessibility";
