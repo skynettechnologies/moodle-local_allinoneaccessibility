@@ -33,7 +33,6 @@ function local_allinoneaccessibility_before_footer() {
     global $PAGE;
     global $CFG;
     $widgetsettingada = get_config('local_allinoneaccessibility');
-    
     $color = isset($widgetsettingada->colorcode) ? $widgetsettingada->colorcode : '0678be';
     $color = trim(str_replace('#', '', $color));
     $token = isset($widgetsettingada->licensekey) ? $widgetsettingada->licensekey : '';
@@ -53,9 +52,9 @@ function local_allinoneaccessibility_before_footer() {
     } else if ($PAGE->pagelayout == 'admin') {
         $currenturl = new moodle_url($PAGE->url);
         $section = $currenturl->get_param('section', '');
-        if($section == 'local_allinoneaccessibility') {
+        if ($section == 'local_allinoneaccessibility') {
             $baseurl = $CFG->wwwroot;
-            $arrRegResponse = local_allinoneaccessibility_register_domain($baseurl);
+            $arrregresponse = local_allinoneaccessibility_register_domain($baseurl);
             include(__DIR__ . '/iparams.html');
             echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>';
         }
@@ -64,8 +63,11 @@ function local_allinoneaccessibility_before_footer() {
 /**
  * Executes a request to the given API and returns the response.
  *
- * @param string $url The URL of the API to which the request is sent.
- * @param array $data The data to send in the request body.
+ * This function sends a request to an external API with the specified data
+ * and processes the response, returning the result as an associative array.
+ *
+ * @param string $url The URL of the API to which the request is sent. This should be a fully qualified URL.
+ * @param array $data The data to send in the request body. Typically, this is an associative array of key-value pairs.
  * @return array The response from the API, usually in JSON format, as an associative array.
  */
 function local_allinoneaccessibility_execute_request($apiurl, $data) {
@@ -88,7 +90,7 @@ function local_allinoneaccessibility_execute_request($apiurl, $data) {
 /**
  * Registers a domain with the external system.
  *
- * @param string $domain The domain name to register.
+ * @param string $currentdomain The domain name to register.
  * @return bool Returns `true` if the registration is successful, `false` otherwise.
  */
 function local_allinoneaccessibility_register_domain($currentdomain) {
@@ -115,9 +117,12 @@ function local_allinoneaccessibility_register_domain($currentdomain) {
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array('name' => $name, 'email' => $email, 'company_name' => $currentdomain, 'website' => base64_encode($currentdomain), 'package_type' => 'free-widget',
-                'start_date' => date('Y-m-d H:i:s'), 'end_date' => '', 'price' => '0', 'discount_price' => '0', 'plaform' => 'Moodle', 'api_key' => '', 'is_trial_period' => '0',
-                'is_free_widget' => '1', 'bill_address' => '', 'country' => '', 'state' => '', 'city' => '', 'post_code' => '', 'transaction_id' => '', 'subscr_id' => '', 'payment_source' => ''),
+            CURLOPT_POSTFIELDS => array('name' => $name, 'email' => $email, 'company_name' => $currentdomain,
+                'website' => base64_encode($currentdomain), 'package_type' => 'free-widget',
+                'start_date' => date('Y-m-d H:i:s'), 'end_date' => '', 'price' => '0',
+                'discount_price' => '0', 'plaform' => 'Moodle', 'api_key' => '', 'is_trial_period' => '0',
+                'is_free_widget' => '1', 'bill_address' => '', 'country' => '', 'state' => '',
+                'city' => '', 'post_code' => '', 'transaction_id' => '', 'subscr_id' => '', 'payment_source' => ''),
         ));
         $response = curl_exec($curl);
         curl_close($curl);
