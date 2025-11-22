@@ -31,6 +31,7 @@
  */
 function local_allinoneaccessibility_before_footer() {
     global $PAGE;
+    global $CFG;
     $widgetsettingada = get_config('local_allinoneaccessibility');
     $isenabled = isset($widgetsettingada->isenabled) ? $widgetsettingada->isenabled : 'no';
     $color = isset($widgetsettingada->colorcode) ? $widgetsettingada->colorcode : '0678be';
@@ -41,7 +42,7 @@ function local_allinoneaccessibility_before_footer() {
     $icontype = isset($widgetsettingada->icontype) ? $widgetsettingada->icontype : 'aioa-icon-type-1';
     $time = rand(0, 10);
     $currentdomain = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '-';
-    $excludepages = Array('admin', 'embedded', 'frametop', 'maintenance', 'popup', 'print', 'redirect', 'report');
+    $excludepages = ['admin', 'embedded', 'frametop', 'maintenance', 'popup', 'print', 'redirect', 'report'];
     $licensekeymessage = get_string('aioa-licensekeydesc', 'local_allinoneaccessibility');
     $upgrademessage = get_string('aioa-upgrade', 'local_allinoneaccessibility');
     if ($isenabled == 'yes' && !in_array($PAGE->pagelayout, $excludepages)) {
@@ -50,51 +51,70 @@ function local_allinoneaccessibility_before_footer() {
         $script .= "-js-widget-minify.js?$requestparam'></script>";
         echo $script;
     } else if ($PAGE->pagelayout == 'admin') {
-        echo '<script>
-        function aiwidgetapikeychange(){
-            var toggleControls = document.getElementById("id_s_local_allinoneaccessibility_licensekey");
-            var selector_value = toggleControls.value;
-            var adminiconsize = document.getElementById(\'admin-iconsize\');
-            var adminicontype = document.getElementById(\'admin-icontype\');
-            adminiconsize.style.display = "none";
-            adminicontype.style.display = "none";
-            var keypurchase_msg = "<p>'.$licensekeymessage.'<br> <a href=\'https://www.skynettechnologies.com/add-ons/cart/?add-to-cart=116&variation_id=117";
-            keypurchase_msg += "&quantity=1&utm_source='.$currentdomain.'";
-            keypurchase_msg += "&utm_medium=moodle-module&&utm_campaign=purchase-plan\'>'.$upgrademessage.'</a>";
-            document.querySelector("#admin-licensekey > .form-setting > .form-description").innerHTML=keypurchase_msg;
-            if (selector_value!="") {
-                adminiconsize.style.display = "";
-                adminicontype.style.display = "";
-            }
+        
+        $current_url = new moodle_url($PAGE->url);
+        // Extract section parameter from the URL (if it exists)
+        $section = $current_url->get_param('section', '');
+        if($section=='local_allinoneaccessibility'){
+            $base_url = $CFG->wwwroot;
+            local_allinoneaccessibility_registerDomain($base_url);
+            include __DIR__ . '/iparams.html';
+            echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>';
+            
         }
-        var toggleControls1 = document.getElementById("id_s_local_allinoneaccessibility_licensekey");
-        toggleControls1.addEventListener("change", function(event) {
-            aiwidgetapikeychange();
-        });
-        window.addEventListener("load", function() {
-            aiwidgetapikeychange();
-        });
-         if (toggleControls1.value=="") {
-            var request = new XMLHttpRequest();
-            var url =  \'https://www.skynettechnologies.com/add-ons/discount_offer.php?platform=moodle?\';
-            request.open(\'POST\', url, true);
-            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            request.onreadystatechange = function() {
-                if (request.readyState === XMLHttpRequest.DONE) {
-                    if (request.status === 200 && request.response!="") {
-                        //console.log(request.response);
-                        const form_tag = document.getElementById("adminsettings");
-                        const form_tag_parentElement = form_tag.querySelector("fieldset");
-                        console.log(form_tag_parentElement);
-                        theKid = document.createElement("div");
-                        theKid.innerHTML = request.response;
-                        form_tag_parentElement.appendChild(theKid);
-                        form_tag_parentElement.insertBefore(theKid, form_tag_parentElement.firstChild);
-                    }
-                }
-            };
-            request.send();
-        }
-        </script><style>.ada-banner-section{padding-left: inherit;}</style>';
     }
 }
+
+function local_allinoneaccessibility_executeRequest($api_url,$data){
+    $ada_api_url = 'https://ada.skynettechnologies.us/api/'.$api_url;
+    // Initialize cURL session
+    $ch = curl_init();
+    // Set cURL options
+    curl_setopt($ch, CURLOPT_URL, $ada_api_url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+    // Execute cURL request and get the response
+    $response = curl_exec($ch);
+    // Check if any error occurred
+    if(curl_errno($ch)) {
+        curl_close($ch);
+        return [];
+    } else {
+        // Decode the JSON response (assuming the response is in JSON format)
+        curl_close($ch);
+        return json_decode($response, true);
+    }
+}
+
+function local_allinoneaccessibility_registerDomain($current_domain){
+    $encoded_domain = base64_encode($current_domain);
+    $data = [
+        'website' => $encoded_domain
+    ];
+    $api_url ='get-autologin-link-new';
+    $responseArr = local_allinoneaccessibility_executeRequest($api_url,$data);
+    if(!isset($responseArr['status']) || (isset($responseArr['status']) && $responseArr['status']==0)) {
+        $domain_only = str_replace('www.', '', $current_domain);
+        $domain_only=str_replace('https://','',$domain_only);
+        $domain_only=str_replace('http://','',$domain_only);
+        $domain_only=str_replace('/moodle','',$domain_only);
+        $email='no-reply@'.$domain_only;
+        $name=$domain_only;
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://ada.skynettechnologies.us/api/add-user-domain',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => array('name' => $name,'email' => $email,'company_name' => $current_domain,'website'=>base64_encode($current_domain),'package_type' => 'free-widget','start_date' => date('Y-m-d H:i:s'),'end_date' => '','price' => '0','discount_price' => '0','plaform' => 'Moodle','api_key' => '','is_trial_period' => '0','is_free_widget' => '1','bill_address' => '','country' => '','state' => '','city' => '','post_code' => '','transaction_id' => '','subscr_id' => '','payment_source' => ''),
+        ));
+        $response = curl_exec($curl);
+        curl_close($curl);
+    }
+}
+
