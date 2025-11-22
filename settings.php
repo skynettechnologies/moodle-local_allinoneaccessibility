@@ -27,5 +27,4 @@ if ($hassiteconfig) {
     // Settings will be NULL.
     $settings = new admin_settingpage('local_allinoneaccessibility', get_string('pluginname', 'local_allinoneaccessibility'));
     $ADMIN->add('localplugins', $settings);
-    
 }
