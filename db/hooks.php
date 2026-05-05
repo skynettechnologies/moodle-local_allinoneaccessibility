@@ -23,8 +23,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_allinoneaccessibility';
-$plugin->release = '1.0.2';
-$plugin->version  = 2026040707;
-$plugin->requires = 2022041900;
-$plugin->maturity = MATURITY_STABLE;
+$callbacks = [
+    [
+        'hook' => \core\hook\output\before_standard_head_html_generation::class,
+        'callback' => '\local_allinoneaccessibility\hook_callbacks::before_standard_head_html_generation',
+    ],
+];

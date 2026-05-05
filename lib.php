@@ -14,38 +14,39 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * Local All In One Accessibility
  *
  * Quick Web Accessibility Implementation with All In One Accessibility!
  *
  * @package local_allinoneaccessibility
- * @copyright  2024
+ * @copyright  2024 Rajesh Bhimani <developer3@skynettechnologies.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 /**
  * Render the setting for widget.
  *
  * @return void
  */
-function local_allinoneaccessibility_before_footer() {
+function local_allinoneaccessibility_before_standard_html_head() {
     global $PAGE;
     global $CFG;
     $widgetsettingada = get_config('local_allinoneaccessibility');
-    $color = isset($widgetsettingada->colorcode) ? $widgetsettingada->colorcode : '0678be';
+    $color = '0678be';
     $color = trim(str_replace('#', '', $color));
-    $token = isset($widgetsettingada->licensekey) ? $widgetsettingada->licensekey : '';
-    $iconposition = isset($widgetsettingada->iconposition) ? $widgetsettingada->iconposition : '';
-    $iconsize = isset($widgetsettingada->iconsize) ? $widgetsettingada->iconsize : 'aioa-default-icon';
-    $icontype = isset($widgetsettingada->icontype) ? $widgetsettingada->icontype : 'aioa-icon-type-1';
+    $token = '';
+    $iconposition = '';
+    $iconsize = 'aioa-default-icon';
+    $icontype = 'aioa-icon-type-1';
     $time = rand(0, 10);
     $currentdomain = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '-';
     $excludepages = ['admin', 'embedded', 'frametop', 'maintenance', 'popup', 'print', 'redirect', 'report'];
     $licensekeymessage = get_string('aioa-licensekeydesc', 'local_allinoneaccessibility');
     $upgrademessage = get_string('aioa-upgrade', 'local_allinoneaccessibility');
     if (!in_array($PAGE->pagelayout, $excludepages)) {
-        $requestparam = 'colorcode=#'.$color.'&token='.$token.'&t='.$time.'&position='.$iconposition.'.'.$icontype.'.'.$iconsize;
+        $requestparam = 'colorcode=#' . $color . '&token=' . $token . '&t=' .
+            $time . '&position=' . $iconposition . '.' . $icontype . '.' . $iconsize;
         $script = "<script id='aioa-adawidget' src='https://www.skynettechnologies.com/accessibility/js/all-in-one-accessibility";
         $script .= "-js-widget-minify.js?$requestparam'></script>";
         echo $script;
@@ -55,34 +56,49 @@ function local_allinoneaccessibility_before_footer() {
         if ($section == 'local_allinoneaccessibility') {
             $baseurl = $CFG->wwwroot;
             $arrregresponse = local_allinoneaccessibility_register_domain($baseurl);
-            include(__DIR__ . '/iparams.html');
+            include(__DIR__ . '/iparams.php');
             echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>';
         }
     }
 }
+
+/**
+ * Upgrade script for local_allinoneaccessibility.
+ *
+ * @param int $oldversion
+ * @return bool
+ */
+function local_allinoneaccessibility_upgrade($oldversion) {
+    if ($oldversion < 2025121824) {
+        local_allinoneaccessibility_before_standard_html_head();
+    }
+    return true;
+}
+
 /**
  * Executes a request to the given API and returns the response.
  *
  * This function sends a request to an external API with the specified data
  * and processes the response, returning the result as an associative array.
  *
- * @param string $url The URL of the API to which the request is sent. This should be a fully qualified URL.
+ * @param string $apiurl The URL of the API to which the request is sent. This should be a fully qualified URL.
  * @param array $data The data to send in the request body. Typically, this is an associative array of key-value pairs.
  * @return array The response from the API, usually in JSON format, as an associative array.
  */
 function local_allinoneaccessibility_execute_request($apiurl, $data) {
-    $adaapiurl = 'https://ada.skynettechnologies.us/api/'.$apiurl;
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $adaapiurl);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-    $response = curl_exec($ch);
-    if (curl_errno($ch)) {
-        curl_close($ch);
+    global $CFG;
+    require_once($CFG->libdir . '/filelib.php');
+    $curl = new curl();
+    $adaapiurl = 'https://ada.skynettechnologies.us/api/' . $apiurl;
+    $postdata = http_build_query($data);
+    $options = ['CURLOPT_RETURNTRANSFER' => true,
+        'CURLOPT_POST' => true,
+        'CURLOPT_POSTFIELDS' => $postdata];
+    $response = $curl->post($adaapiurl, $data, $options);
+    if ($response === false) {
         return [];
     } else {
-        curl_close($ch);
+        // Decode the response JSON and return it as an associative array.
         return json_decode($response, true);
     }
 }
@@ -94,9 +110,11 @@ function local_allinoneaccessibility_execute_request($apiurl, $data) {
  * @return bool Returns `true` if the registration is successful, `false` otherwise.
  */
 function local_allinoneaccessibility_register_domain($currentdomain) {
+    global $CFG;
+    require_once($CFG->libdir . '/filelib.php');
     $encodeddomain = base64_encode($currentdomain);
     $data = [
-        'website' => $encodeddomain
+        'website' => $encodeddomain,
     ];
     $apiurl = 'get-autologin-link-new';
     $responsearr = local_allinoneaccessibility_execute_request($apiurl, $data);
@@ -105,27 +123,21 @@ function local_allinoneaccessibility_register_domain($currentdomain) {
         $domainonly = str_replace('https://', '', $domainonly);
         $domainonly = str_replace('http://', '', $domainonly);
         $domainonly = str_replace('/moodle', '', $domainonly);
-        $email = 'no-reply@'.$domainonly;
+        $email = 'no-reply@' . $domainonly;
         $name = $domainonly;
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://ada.skynettechnologies.us/api/add-user-domain',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array('name' => $name, 'email' => $email, 'company_name' => $currentdomain,
-                'website' => base64_encode($currentdomain), 'package_type' => 'free-widget',
-                'start_date' => date('Y-m-d H:i:s'), 'end_date' => '', 'price' => '0',
-                'discount_price' => '0', 'plaform' => 'Moodle', 'api_key' => '', 'is_trial_period' => '0',
-                'is_free_widget' => '1', 'bill_address' => '', 'country' => '', 'state' => '',
-                'city' => '', 'post_code' => '', 'transaction_id' => '', 'subscr_id' => '', 'payment_source' => ''),
-        ));
-        $response = curl_exec($curl);
-        curl_close($curl);
+        $curl = new curl();
+        $url = 'https://ada.skynettechnologies.us/api/add-user-domain';
+        $postdata = [ 'name' => $name, 'email' => $email, 'company_name' => $currentdomain,
+            'website' => base64_encode($currentdomain), 'package_type' => 'free-widget',
+            'start_date' => date('Y-m-d H:i:s'), 'end_date' => '', 'price' => '0',
+            'discount_price' => '0', 'platform' => 'Moodle', 'api_key' => '', 'is_trial_period' => '0',
+            'is_free_widget' => '1', 'bill_address' => '', 'country' => '', 'state' => '', 'city' => '',
+            'post_code' => '', 'transaction_id' => '', 'subscr_id' => '', 'payment_source' => ''];
+        $options = ['CURLOPT_RETURNTRANSFER' => true, 'CURLOPT_ENCODING' => '',
+            'CURLOPT_MAXREDIRS' => 10, 'CURLOPT_TIMEOUT' => 0,
+            'CURLOPT_FOLLOWLOCATION' => true,
+            'CURLOPT_HTTP_VERSION' => CURL_HTTP_VERSION_1_1];
+        $response = $curl->post($url, $postdata, $options);
         return true;
     }
     return true;

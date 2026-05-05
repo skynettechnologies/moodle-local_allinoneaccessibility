@@ -17,14 +17,22 @@
 /**
  * Settings definition
  * @package local_allinoneaccessibility
- * @copyright  2024
+ * @copyright  2024 Rajesh Bhimani <developer3@skynettechnologies.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
 if ($hassiteconfig) {
-    // Settings will be NULL.
-    $settings = new admin_settingpage('local_allinoneaccessibility', get_string('pluginname', 'local_allinoneaccessibility'));
-    $ADMIN->add('localplugins', $settings);
+    // The settings UI is rendered by /local/allinoneaccessibility/iparams.php.
+    $ADMIN->add(
+        'localplugins',
+        new admin_externalpage(
+            'local_allinoneaccessibility',
+            get_string('pluginname', 'local_allinoneaccessibility'),
+            new moodle_url('/local/allinoneaccessibility/iparams.php')
+        )
+    );
+
+    $settings = null;
 }

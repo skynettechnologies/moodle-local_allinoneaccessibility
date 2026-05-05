@@ -1,0 +1,383 @@
+{{!
+    @template local_allinoneaccessibility/iparams
+
+    Accessibility widget settings page.
+
+    Example context (json):
+    {
+        "username": "example.com",
+        "email": "no-reply@example.com",
+
+        "positions": [
+            { "value": "top_left", "label": "Top left", "checked": false },
+            { "value": "bottom_right", "label": "Bottom right", "checked": true }
+        ],
+
+        "icon_types": [
+            {
+                "value": "aioa-icon-type-1",
+                "label": "Icon type 1",
+                "image": "https://example.com/icon.svg",
+                "checked": true
+            }
+        ],
+
+        "icon_sizes": [
+            {
+                "id": "edit-size-medium",
+                "value": "aioa-medium-icon",
+                "label": "Medium",
+                "image": "https://example.com/icon.svg",
+                "size": 65,
+                "checked": true
+            }
+        ],
+
+        "custom_size_toggle_title": "Enable custom size",
+        "custom_size_label": "Custom size",
+        "select_exact_size_label": "Select exact size",
+        "select_exact_size_desc": "Choose an exact icon size in pixels",
+        "select_icon_size_desktop_label": "Select icon size (desktop)",
+        "widget_icon_size_custom": 65,
+        "px_label": "Pixels"
+    }
+}}
+
+<div id="container">
+  <div class="main">
+    <div class="panel panel-default aioa-settings-panel">
+      <div class="panel-body">
+
+        <input type="hidden" id="username" value="{{username}}" />
+        <input type="hidden" id="email" value="{{email}}" />
+
+        <div class="shopify-wrap-block">
+          <div class="container">
+            <div class="set-width">
+              <div class="all-in-one-accessibility-wrap">
+                <div class="accessibility-settings">
+                  <div class="all-one-accessibility-form">
+                    <div class="all-one-accessibility-form-inner">
+
+                      <form id="widget-form" class="form-controler">
+                        <input type="hidden" name="action" value="save">
+
+                        <!-- Header -->
+                        <div class="mb-3 row">
+                          <div class="col-sm-12">
+                            <div class="header-content">
+                              <h1 class="mb-0 text-black aioa-text-center">
+                                <img src="https://ada.skynettechnologies.us/public/trial-assets/images/all-in-one-accessibility-logo.svg"
+                                     alt="{{#str}}aioa_logo_title, local_allinoneaccessibility{{/str}}">
+                              </h1>
+                            </div>
+
+                            <div class="form-text">
+                              <b>{{#str}}aioa_free_message_one, local_allinoneaccessibility{{/str}}</b>
+                              <p>
+                                {{#str}}aioa-please, local_allinoneaccessibility{{/str}}
+                                <a href="https://ada.skynettechnologies.us/trial-subscription" target="_blank">
+                                  {{#str}}aioa-upgrade, local_allinoneaccessibility{{/str}}
+                                </a>
+                                {{#str}}aioa_free_message_two, local_allinoneaccessibility{{/str}}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- License key -->
+                        <div class="mb-3 row d-none" id="license_key_html">
+                          <label class="col-sm-3 col-form-label">
+                            {{#str}}aioa-licensekey, local_allinoneaccessibility{{/str}}
+                          </label>
+                          <div class="col-sm-9">
+                            <input type="text" id="license_key" class="form-control" />
+                            <p class="form-text" id="error_message"></p>
+                          </div>
+                        </div>
+
+                        <!-- Color code -->
+                        <div class="mb-3 row" id="colorcode_html">
+                          <h3 class="col-sm-3 col-form-label">
+                            {{#str}}aioa-colorcode, local_allinoneaccessibility{{/str}}
+                          </h3>
+                          <div class="col-sm-9">
+                            <input type="text" id="colorcode" class="form-control" />
+                            <div class="form-text">
+                              {{#str}}aioa-colorcodedesc, local_allinoneaccessibility{{/str}}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="icon-custom-position-wrapper mb-3 row">
+                            <div class="col-sm-12 mb-4">
+
+                                <label class="custom-switcher">
+                                    <span class="custom-switcher_right">
+                                        <input
+                                            type="checkbox"
+                                            id="custom-position-switcher"
+                                            class="custom-switcher_inp_2"
+                                            value="1"
+                                        />
+                                        <span
+                                            class="custom-switcher_body"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-placement="bottom"
+                                            title="{{#str}}aioa-iconposition-toggle-title, local_allinoneaccessibility{{/str}}"
+                                            data-bs-custom-class="switcher-tooltip">
+                                        </span>
+                                        <span class="custom-switcher_label">
+                                            {{#str}}aioa-iconposition-toggle, local_allinoneaccessibility{{/str}}
+                                        </span>
+                                    </span>
+                                </label>
+
+                                <div class="custom-position-controls hide">
+
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <div class="input-group mb-3">
+                                                <input
+                                                    type="number"
+                                                    min="0"
+                                                    max="250"
+                                                    class="form-control"
+                                                    id="custom_position_x_value"
+                                                    aria-label="{{#str}}aioa-px-label, local_allinoneaccessibility{{/str}}"
+                                                    aria-describedby="pos-value-input-1"
+                                                    oninput="this.value = Math.min(Math.max(this.value, 0), 250)"
+                                                />
+                                                <span
+                                                    class="input-group-text"
+                                                    id="pos-value-input-1">
+                                                    {{#str}}aioa-px, local_allinoneaccessibility{{/str}}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-auto">
+                                            <select
+                                                class="form-select"
+                                                name="custom_position_x_direction">
+                                                <option value="cust-pos-to-the-right" selected>
+                                                    {{#str}}aioa-to-the-right, local_allinoneaccessibility{{/str}}
+                                                </option>
+                                                <option value="cust-pos-to-the-left">
+                                                    {{#str}}aioa-to-the-left, local_allinoneaccessibility{{/str}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <div class="input-group mb-3">
+                                                <input
+                                                    type="number"
+                                                    min="0"
+                                                    max="250"
+                                                    class="form-control"
+                                                    id="custom_position_y_value"
+                                                    aria-label="{{#str}}aioa-px-label, local_allinoneaccessibility{{/str}}"
+                                                    aria-describedby="pos-value-input-2"
+                                                    oninput="this.value = Math.min(Math.max(this.value, 0), 250)"
+                                                />
+                                                <span
+                                                    class="input-group-text"
+                                                    id="pos-value-input-2">
+                                                    {{#str}}aioa-px, local_allinoneaccessibility{{/str}}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-auto">
+                                            <select
+                                                class="form-select"
+                                                name="custom_position_y_direction">
+                                                <option value="cust-pos-to-the-lower" selected>
+                                                    {{#str}}aioa-to-the-bottom, local_allinoneaccessibility{{/str}}
+                                                </option>
+                                                <option value="cust-pos-to-the-upper">
+                                                    {{#str}}aioa-to-the-top, local_allinoneaccessibility{{/str}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="description">
+                                        {{#str}}aioa-cust-position-desc, local_allinoneaccessibility{{/str}}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Widget position radios -->
+                        <div class="mb-3 row widget-position" id="position_html">
+                          <label class="col-sm-3 col-form-label">
+                            {{#str}}aioa-iconpositiondesc, local_allinoneaccessibility{{/str}}
+                          </label>
+
+
+                          <div class="col-sm-12 three-col">
+                            {{#positions}}
+                            <div class="form-item">
+                              <input type="radio" name="position" id="position_{{value}}" value="{{value}}" {{#checked}}checked{{/checked}} />
+                              <label class="option" for="position_{{value}}">{{label}}</label>
+                            </div>
+                            {{/positions}}
+                          </div>
+                        </div>
+
+                        <!-- Widget size -->
+                        <h3>{{#str}}aioa-select-widget-size, local_allinoneaccessibility{{/str}}</h3>
+                        <div class="form-radios mb-3">
+                          <label for="widget_size_0">
+                            <input type="radio" name="widget_size" id="widget_size_0" value="0" checked>
+                            {{#str}}aioa-regular-size, local_allinoneaccessibility{{/str}}
+                          </label>
+                          <label for="widget_size_1">
+                            <input type="radio" name="widget_size" id="widget_size_1" value="1">
+                            {{#str}}aioa-oversize, local_allinoneaccessibility{{/str}}
+                          </label>
+                          <div class="fieldset__description">
+                            {{#str}}aioa-widget-size-desc, local_allinoneaccessibility{{/str}}
+                          </div>
+                        </div>
+
+                        <!-- Icon types (looped) -->
+                        <div class="icon-size-wrapper row" id="select_icon_type">
+                          {{#icon_types}}
+                          <div class="col-auto mb-30">
+                            <input type="radio" name="aioa_icon_type" id="aioa_icon_type_{{value}}" value="{{value}}" {{#checked}}checked{{/checked}} />
+                            <label class="option" for="aioa_icon_type_{{value}}">
+                              <img src="{{image}}" width="65" height="65" alt="{{label}}" />
+                              <span class="visually-hidden">{{label}}</span>
+                            </label>
+                          </div>
+                          {{/icon_types}}
+                        </div>
+                        <div class="icon-custom-size-wrapper mb-3 row">
+                            <div class="col-sm-12">
+                                <label class="custom-switcher">
+                                    <span class="custom-switcher_right">
+                                        <input
+                                            type="checkbox"
+                                            id="custom-size-switcher"
+                                            class="custom-switcher_inp_2"
+                                            value="1"
+                                        />
+                                        <span
+                                            class="custom-switcher_body"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-placement="bottom"
+                                            title="{{custom_size_toggle_title}}"
+                                            data-bs-custom-class="switcher-tooltip">
+                                        </span>
+                                        <span class="custom-switcher_label">
+                                            {{custom_size_label}}
+                                        </span>
+                                    </span>
+                                </label>
+
+                                <div class="custom-size-controls hide">
+                                    <div class="row"></div>
+
+                                    <div class="col-auto controls ms-0">
+                                        <label for="widget_icon_size_custom" class="form-label">
+                                            {{select_exact_size_label}}
+                                        </label>
+
+                                        <div class="input-group mb-2">
+                                            <input
+                                                type="number"
+                                                class="form-control"
+                                                id="widget_icon_size_custom"
+                                                name="widget_icon_size_custom"
+                                                value="{{widget_icon_size_custom}}"
+                                                min="20"
+                                                max="150"
+                                                aria-label="{{px_label}}"
+                                                aria-describedby="size-value-input_1"
+                                            />
+                                            <span class="input-group-text" id="size-value-input_1">PX</span>
+                                        </div>
+
+                                        <div class="description">
+                                            {{select_exact_size_desc}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="icon-size-wrapper widget-icon row" id="select_icon_size">
+
+                            <label class="col-sm-12 col-form-label">
+                                {{select_icon_size_desktop_label}}
+                            </label>
+
+                            <div class="col-sm-12" style="padding-right: calc(var(--bs-gutter-x) * .2); padding-left: calc(var(--bs-gutter-x) * .2);">
+                                <div class="row">
+
+                                    {{#icon_sizes}}
+                                    <div class="col-auto mb-30">
+                                        <div class="js-form-item form-item js-form-type-radio form-type-radio js-form-item-position form-item-position">
+
+                                            <input
+                                                type="radio"
+                                                id="{{id}}"
+                                                name="aioa_icon_size"
+                                                value="{{value}}"
+                                                class="form-radio"
+                                                {{#checked}}checked{{/checked}}
+                                            />
+
+                                            <label for="{{id}}" class="option">
+                                                <img
+                                                    src="{{image}}"
+                                                    width="{{size}}"
+                                                    height="{{size}}"
+                                                    style="height: {{size}}px;"
+                                                    class="iconimg"
+                                                    alt="{{label}}"
+                                                />
+                                                <span class="visually-hidden">{{label}}</span>
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                    {{/icon_sizes}}
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Save -->
+                        <div class="save-changes-btn">
+                          <button type="button" id="submit" class="btn btn-primary">
+                            {{#str}}aioa-save-changes, local_allinoneaccessibility{{/str}}
+                          </button>
+                          <div class="mt-3 row" id="save-changes-success">
+                            <div class="form-text">
+                              {{#str}}aioa-save-changes-message, local_allinoneaccessibility{{/str}}
+                            </div>
+                          </div>
+                        </div>
+
+                      </form>
+
+                      <div id="loader"><div class="spinner"></div></div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
