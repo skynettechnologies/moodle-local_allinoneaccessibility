@@ -129,15 +129,15 @@ function local_allinoneaccessibility_register_domain($currentdomain) {
             'CURLOPT_MAXREDIRS' => 10, 'CURLOPT_TIMEOUT' => 0,
             'CURLOPT_FOLLOWLOCATION' => true,
             'CURLOPT_HTTP_VERSION' => CURL_HTTP_VERSION_1_1];
-        $euCurl = new curl();
-        $noRequiredEU = 1;
-        $euResponseString = $euCurl->post('https://ipapi.co/json/', [], $options);
-        if ($euResponseString) {
-            $euResponse = json_decode($euResponseString, true);
-            if (isset($euResponse['in_eu']) && $euResponse['in_eu']) {
-                $noRequiredEU = 0;
+        $eucurl = new curl();
+        $norequiredeu = 1;
+        $euresponsertring = $eucurl->post('https://ipapi.co/json/', [], $options);
+        if ($euresponsertring) {
+            $euresponse = json_decode($euresponsestring, true);
+            if (isset($euresponse['in_eu']) && $euresponse['in_eu']) {
+                $norequiredeu = 0;
             }
-        }        
+        }
         $curl = new curl();
         $url = 'https://ada.skynettechnologies.us/api/add-user-domain';
         $postdata = [ 'name' => $name, 'email' => $email, 'company_name' => $currentdomain,
@@ -145,9 +145,8 @@ function local_allinoneaccessibility_register_domain($currentdomain) {
             'start_date' => date('Y-m-d H:i:s'), 'end_date' => '', 'price' => '0',
             'discount_price' => '0', 'platform' => 'Moodle', 'api_key' => '', 'is_trial_period' => '0',
             'is_free_widget' => '1', 'bill_address' => '', 'country' => '', 'state' => '', 'city' => '',
-            'post_code' => '', 'transaction_id' => '', 'subscr_id' => '', 'payment_source' => '', 
-            'no_required_eu' => $noRequiredEU];
-        
+            'post_code' => '', 'transaction_id' => '', 'subscr_id' => '', 'payment_source' => '',
+            'no_required_eu' => $norequiredeu];
         $response = $curl->post($url, $postdata, $options);
         return true;
     }
