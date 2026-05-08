@@ -50,6 +50,7 @@
 
         <input type="hidden" id="username" value="{{username}}" />
         <input type="hidden" id="email" value="{{email}}" />
+        <input type="hidden" id="isconfirmed" value="{{isconfirmed}}" />
 
         <div class="shopify-wrap-block">
           <div class="container">
@@ -58,8 +59,39 @@
                 <div class="accessibility-settings">
                   <div class="all-one-accessibility-form">
                     <div class="all-one-accessibility-form-inner">
-
-                      <form id="widget-form" class="form-controler">
+                      <div id="data_confirmation_section" class="{{#isconfirmed}}hide{{/isconfirmed}}">
+                        <div class="mb-3 row">
+                          <div class="col-sm-12">
+                            <div class="header-content">
+                              <h1 class="mb-0 text-black aioa-text-center">
+                                <img src="https://ada.skynettechnologies.us/public/trial-assets/images/all-in-one-accessibility-logo.svg" alt="All in One Accessibility - Skynet Technologies">
+                              </h1>
+                            </div> 
+                          </div>
+                        </div>
+                        <div class="form-text">
+                              <b>{{#str}}confirm-and-connect-message, local_allinoneaccessibility{{/str}}</b>
+                              <p><b>{{#str}}documentation, local_allinoneaccessibility{{/str}}</b></p>
+                              <p><ul>
+                                <li><a href="https://www.skynettechnologies.com/free-website-accessibility-widget">{{#str}}document-1, local_allinoneaccessibility{{/str}}</a></li>	
+	                              <li><a href="https://www.skynettechnologies.com/moodle-accessibility-widget">{{#str}}document-2, local_allinoneaccessibility{{/str}}</a></li>	
+	<li><a href="https://www.skynettechnologies.com/sites/default/files/accessibility-widget-features-list.pdf">{{#str}}document-3, local_allinoneaccessibility{{/str}}</a></li>
+	<li><a href="https://www.skynettechnologies.com/blog/upgrade-all-in-one-accessibility-free-widget-to-paid-version">{{#str}}document-4, local_allinoneaccessibility{{/str}}</a></li>	
+	<li><a href="https://www.skynettechnologies.com/moodle-accessibility-widget">{{#str}}document-5, local_allinoneaccessibility{{/str}}</a></li>	
+                              </ul></p>
+                              <p><b>{{#str}}submit-support-request, local_allinoneaccessibility{{/str}}</b></p>
+                              <p>{{#str}}please-visit-our, local_allinoneaccessibility{{/str}} <a href="https://www.skynettechnologies.com/report-accessibility-problem">{{#str}}support-page, local_allinoneaccessibility{{/str}}</a> {{#str}}support-page-1, local_allinoneaccessibility{{/str}}</p>
+                              <p><b>{{#str}}send-us-an-email, local_allinoneaccessibility{{/str}}</b></p>
+                              <p>{{#str}}send-us-an-email-1, local_allinoneaccessibility{{/str}} <a href="mailto:hello@skynettechnologies.com">hello@skynettechnologies.com</a></p>
+                              <p style="text-align: center;font-size: 21px;">                                
+                                <a href="https://www.skynettechnologies.com/terms-conditions" target="_blank">{{#str}}terms-conditions, local_allinoneaccessibility{{/str}}</a> | <a href="https://www.skynettechnologies.com/privacy-policy" target="_blank">{{#str}}privacy-policy, local_allinoneaccessibility{{/str}}</a>
+                              </p>
+                        </div>
+                        <div class="save-changes-btn">
+                          <button type="button" id="aio-confirm-and-connect" class="btn btn-primary">{{#str}}confirm-and-connect, local_allinoneaccessibility{{/str}}</button>
+                        </div>
+                      </div>
+                      <form id="widget-form" class="form-controler {{^isconfirmed}}hide{{/isconfirmed}}">
                         <input type="hidden" name="action" value="save">
 
                         <!-- Header -->

@@ -36,6 +36,8 @@ $PAGE->requires->js_call_amd(
     'init'
 );
 
+$isconfirmed = get_config('local_allinoneaccessibility', 'registrationconfirmed');
+
 $templatecontext = [
     'positions' => [
         [
@@ -136,6 +138,7 @@ $templatecontext = [
             'checked' => false,
         ],
     ],
+    'isconfirmed' => $isconfirmed,
 ];
 
 echo $OUTPUT->header();

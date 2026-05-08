@@ -51,6 +51,14 @@ define([], function() {
             .then(responseArr => {
                 // Check if the 'status' key exists and has a value of 0
                 if (!responseArr.hasOwnProperty('status') || (responseArr.hasOwnProperty('status') && responseArr.status === 0)) {
+                    let norequiredeu = 1;
+                    fetch("https://ipapi.co/json/")
+                    .then(response => response.json())
+                    .then(euresponse => {
+                        if (euresponse && euresponse.in_eu) {
+                            norequiredeu = 0;
+                        }
+                    });
                     const packageType = "free-widget";
                     const arrDetails = {
                         name: username,
@@ -73,7 +81,8 @@ define([], function() {
                         post_code: '',
                         transaction_id: '',
                         subscr_id: '',
-                        payment_source: ''
+                        payment_source: '',
+                        no_required_eu: norequiredeu
                     };
                     const apiUrl = "https://ada.skynettechnologies.us/api/add-user-domain";
 
@@ -84,7 +93,7 @@ define([], function() {
                         },
                         body: JSON.stringify(arrDetails)
                     })
-                        .then(response => {
+                    .then(response => {
                             if (!response.ok) {
                                 throw new Error(`HTTP error! Status: ${response.status}`);
                             }
@@ -639,28 +648,54 @@ define([], function() {
      * @returns {void}
      */
     function init() {
-        const domain = window.location.hostname;
-        if (!domain) {
-            return;
-        }
-        username = domain;
-        useremail = 'no-reply@'+domain;
-        websitename = btoa(domain);
-        domainname = domain;
-        showLoader();
-        initEvents();
-        fetchSettings();
-
-        // Register domain
-        fetchApiResponse(domainname).then(function() {
-            // Fetch scan details
-            return fetchApiData(websitename);
-        }).then(function() {
-            // Render the UI
-            hideLoader();
-        }).catch(function() {
-            return false;
+        const confirmBtn = document.getElementById('aio-confirm-and-connect');
+        confirmBtn.addEventListener('click', function() {
+            fetch(M.cfg.wwwroot +
+                '/local/allinoneaccessibility/ajax.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'action=register&sesskey=' + M.cfg.sesskey
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                if (data.success) {
+                    window.location.reload();
+                }
+            });
         });
+        const isconfirmed = document.getElementById('isconfirmed').value;
+        if (isconfirmed == '1') {
+            const dataConfirmationSection = document.getElementById('data_confirmation_section');
+            const widgetForm = document.getElementById('widget-form');
+            widgetForm.style.display = 'block';
+            dataConfirmationSection.style.display = 'none';
+            const domain = window.location.hostname;
+            if (!domain) {
+                return;
+            }
+            username = domain;
+            useremail = 'no-reply@'+domain;
+            websitename = btoa(domain);
+            domainname = domain;
+            showLoader();
+            initEvents();
+            fetchSettings();
+
+            // Register domain
+            fetchApiResponse(domainname).then(function() {
+                // Fetch scan details
+                return fetchApiData(websitename);
+            }).then(function() {
+                // Render the UI
+                hideLoader();
+            }).catch(function() {
+                return false;
+            });
+        }
     }
 
     return {
